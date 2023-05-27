@@ -16,6 +16,7 @@ const isDev = computed(() => import.meta.env.DEV);
         <RouterView />
       </NEl>
     </NThemeEditor>
+    <!-- NEl 组件 是为了让 css 变量可以被 unocss 访问或者 普通css 访问 -->
     <NEl class="nel" v-else>
       <RouterView />
     </NEl>
