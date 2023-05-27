@@ -12,6 +12,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest'
   },
+  "ignorePatterns": ["index.html", "public/**/*"],
   rules:{
     'vue/multi-word-component-names': 'off'
   }
