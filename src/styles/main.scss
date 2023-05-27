@@ -1,0 +1,20 @@
+html {
+  // 方便 unocss 换算，1rem = 4px unocss 是以 0.25rem 为单位
+  font-size: 4px;
+}
+
+body {
+  font-size: 14px;
+}
+
+html,
+body,
+#app,
+.n-config-provider,
+.nel {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
