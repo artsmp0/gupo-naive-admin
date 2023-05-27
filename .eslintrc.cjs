@@ -15,6 +15,24 @@ module.exports = {
   },
   "ignorePatterns": ["index.html", "public/**/*"],
   rules:{
-    'vue/multi-word-component-names': 'off'
+    'vue/multi-word-component-names': 'off',
+    'vue/component-name-in-template-casing': [
+      'error',
+      'PascalCase',
+      {
+          registeredComponentsOnly: false,
+          ignores: [],
+      },
+  ],
+  'vue/attributes-order': ['error'],
+  'vue/component-tags-order': [
+      'error',
+      {
+          order: ['script', 'template', 'style'],
+      },
+  ],
+  'vue/attribute-hyphenation': ['error', 'always'],
+  '@typescript-eslint/no-explicit-any': 'error',
+  '@typescript-eslint/consistent-type-imports': 'error',
   }
 }
