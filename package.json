@@ -13,7 +13,7 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "src/**/*.{vue,ts}": [
+    "src/**/*": [
       "npm run format",
       "npm run lint"
     ]
