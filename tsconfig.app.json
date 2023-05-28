@@ -2,6 +2,7 @@
   "extends": "@vue/tsconfig/tsconfig.dom.json",
   "include": ["types/**/*", "src/**/*", "src/**/*.vue"],
   "exclude": ["src/**/__tests__/*"],
+  "files": ["./src/router/mock.json"],
   "compilerOptions": {
     "composite": true,
     "baseUrl": ".",

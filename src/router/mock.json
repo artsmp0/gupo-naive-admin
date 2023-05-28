@@ -1,0 +1,28 @@
+{
+  "router": [
+    {
+      "path": "/Overview",
+      "meta": {
+        "icon": "sidebar-dashboard",
+        "title": "概览",
+        "keepAlive": true
+      },
+      "children": []
+    }
+  ],
+  "button": [
+    {
+      "title": "测试按钮",
+      "path": "demo"
+    }
+  ],
+  "otherPage": [
+    {
+      "path": "/Demo/Details",
+      "meta": {
+        "title": "测试详情",
+        "hideTab": true
+      }
+    }
+  ]
+}

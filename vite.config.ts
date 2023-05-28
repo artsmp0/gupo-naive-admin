@@ -7,9 +7,14 @@ import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
 import UnoCSS from 'unocss/vite';
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
+
+const envDir = fileURLToPath(new URL('env', import.meta.url));
+const iconDirs = [fileURLToPath(new URL('src/assets/icons', import.meta.url))];
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  envDir,
   plugins: [
     vue(),
     vueJsx(),
@@ -27,6 +32,10 @@ export default defineConfig({
     Components({
       dts: './types/components.d.ts',
       resolvers: [NaiveUiResolver()]
+    }),
+    createSvgIconsPlugin({
+      iconDirs,
+      symbolId: 'icon-[dir]-[name]'
     })
   ],
   resolve: {
