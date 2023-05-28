@@ -1,91 +1,56 @@
-<script setup lang="ts">
-import { h, type Component } from 'vue';
-import { NIcon } from 'naive-ui';
-import {
-  BookOutline as BookIcon,
-  PersonOutline as PersonIcon,
-  WineOutline as WineIcon
-} from '@vicons/ionicons5';
-import { ref } from 'vue';
+<script setup lang="tsx">
+import { type MenuOption } from 'naive-ui';
+import { usePermissionStore, type MenuItemType } from '@/stores/permission';
+import type { RouteMeta } from 'vue-router';
+import SvgIcon from '@/components/SvgIcon.vue';
+import { RouterLink } from 'vue-router';
 
-function renderIcon(icon: Component) {
-  return () => h(NIcon, null, { default: () => h(icon) });
-}
-const menuOptions = [
-  {
-    label: '且听风吟',
-    key: 'hear-the-wind-sing',
-    icon: renderIcon(BookIcon)
-  },
-  {
-    label: '1973年的弹珠玩具',
-    key: 'pinball-1973',
-    icon: renderIcon(BookIcon),
-    disabled: true,
-    children: [
-      {
-        label: '鼠',
-        key: 'rat'
-      }
-    ]
-  },
-  {
-    label: '寻羊冒险记',
-    key: 'a-wild-sheep-chase',
-    disabled: true,
-    icon: renderIcon(BookIcon)
-  },
-  {
-    label: '舞，舞，舞',
-    key: 'dance-dance-dance',
-    icon: renderIcon(BookIcon),
-    children: [
-      {
-        type: 'group',
-        label: '人物',
-        key: 'people',
-        children: [
-          {
-            label: '叙事者',
-            key: 'narrator',
-            icon: renderIcon(PersonIcon)
-          },
-          {
-            label: '羊男',
-            key: 'sheep-man',
-            icon: renderIcon(PersonIcon)
-          }
-        ]
-      },
-      {
-        label: '饮品',
-        key: 'beverage',
-        icon: renderIcon(WineIcon),
-        children: [
-          {
-            label: '威士忌',
-            key: 'whisky'
-          }
-        ]
-      },
-      {
-        label: '食物',
-        key: 'food',
-        children: [
-          {
-            label: '三明治',
-            key: 'sandwich'
-          }
-        ]
-      },
-      {
-        label: '过去增多，未来减少',
-        key: 'the-past-increases-the-future-recedes'
-      }
-    ]
+type GupoMenuOption = MenuOption & {
+  name: string;
+  meta: RouteMeta;
+};
+
+const permissionStore = usePermissionStore();
+
+const resolveMenu = (menus: MenuItemType[]) => {
+  const list: MenuOption[] = [];
+  menus.forEach((m) => {
+    const children = resolveMenu(m.children);
+    list.push({
+      label: m.meta?.title,
+      key: m.path,
+      name: m.name,
+      meta: m.meta,
+      children: children.length > 0 ? children : undefined
+    });
+  });
+  return list;
+};
+
+const menuOptions = computed<MenuOption[]>(() => {
+  return resolveMenu(permissionStore.menuList);
+});
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const renderIcon: any = (option: GupoMenuOption) => {
+  const icon = option.meta?.icon;
+  if (!icon) return null;
+  return <SvgIcon name={icon} />;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const renderLabel: any = (option: GupoMenuOption) => {
+  if (!option.children) {
+    return <RouterLink to={{ path: option.key as string }}>{option.label}</RouterLink>;
   }
-];
-const collapsed = ref(true);
+  return option.label;
+};
+
+const collapsed = ref(false);
+const route = useRoute();
+const selectedItem = computed(() => {
+  return route.path;
+});
 </script>
 
 <template>
@@ -93,7 +58,7 @@ const collapsed = ref(true);
     bordered
     collapse-mode="width"
     :collapsed-width="64"
-    :width="180"
+    :width="200"
     :collapsed="collapsed"
     :native-scrollbar="false"
     show-trigger
@@ -101,10 +66,13 @@ const collapsed = ref(true);
     @expand="collapsed = false"
   >
     <NMenu
+      :value="selectedItem"
       :collapsed-width="64"
       :collapsed-icon-size="22"
       :options="menuOptions"
       :collapsed="collapsed"
+      :render-icon="renderIcon"
+      :render-label="renderLabel"
     />
   </NLayoutSider>
 </template>

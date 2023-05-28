@@ -50,6 +50,7 @@ export const usePermissionStore = defineStore('permission', () => {
       return { ...meta };
     };
     const modules = import.meta.glob('../views/**/*.vue');
+    console.log('modules: ', modules);
     const generateRoute = (item: MenuItemType, parentPath?: string) => {
       return {
         path: camel2kebab(item.path ?? ''),

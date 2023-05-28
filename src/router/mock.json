@@ -8,6 +8,29 @@
         "keepAlive": true
       },
       "children": []
+    },
+    {
+      "path": "/DataEntry",
+      "meta": {
+        "icon": "sidebar-chart",
+        "title": "数据录入"
+      },
+      "children": [
+        {
+          "path": "/DataEntry/Form",
+          "meta": {
+            "icon": "",
+            "title": "基础表单"
+          }
+        },
+        {
+          "path": "/DataEntry/Search",
+          "meta": {
+            "icon": "",
+            "title": "搜索栏"
+          }
+        }
+      ]
     }
   ],
   "button": [
