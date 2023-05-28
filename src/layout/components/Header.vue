@@ -11,6 +11,7 @@ import { isDark, toggleDark } from '@/composables/dark';
 import { useFullscreen } from '@vueuse/core';
 import { NAvatar, NIcon, NText } from 'naive-ui';
 import { useUserStore } from '@/stores/user';
+import Breadcrumbs from './Breadcrumbs.vue';
 
 const { toggle, isFullscreen } = useFullscreen(document.body);
 
@@ -70,13 +71,16 @@ const onSelect = (key: string) => {
     userStore.logout();
   }
 };
+
+const appName = computed(() => import.meta.env.VITE_APP_TITLE);
 </script>
 
 <template>
   <NLayoutHeader class="h60 flex items-center justify-between px20" bordered>
     <div class="h40" flex="~ justify-center items-center">
-      <img src="@/assets/imgs/logo.png" alt="LOGO" class="mr8 h-full" />
-      <NTag :bordered="false" type="error" size="small">告白气球</NTag>
+      <img src="@/assets/imgs/logo.png" alt="LOGO" class="mr16 h-full" />
+      <NTag mr16 :bordered="false" type="error" size="small">{{ appName }}</NTag>
+      <Breadcrumbs />
     </div>
     <NSpace>
       <NButton circle @click="reload">

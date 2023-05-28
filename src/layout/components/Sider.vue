@@ -1,5 +1,5 @@
 <script setup lang="tsx">
-import { type MenuOption } from 'naive-ui';
+import { NEllipsis, type MenuOption } from 'naive-ui';
 import { usePermissionStore, type MenuItemType } from '@/stores/permission';
 import type { RouteMeta } from 'vue-router';
 import SvgIcon from '@/components/SvgIcon.vue';
@@ -15,6 +15,7 @@ const permissionStore = usePermissionStore();
 const resolveMenu = (menus: MenuItemType[]) => {
   const list: MenuOption[] = [];
   menus.forEach((m) => {
+    if (m.meta?.hideInMenu) return;
     const children = resolveMenu(m.children);
     list.push({
       label: m.meta?.title,
@@ -40,10 +41,18 @@ const renderIcon: any = (option: GupoMenuOption) => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const renderLabel: any = (option: GupoMenuOption) => {
-  if (!option.children) {
-    return <RouterLink to={{ path: option.key as string }}>{option.label}</RouterLink>;
+  if (!option.children || option.meta.isPage) {
+    // 没有 children 说明一定是页面，isPage 标识打上也表示一定是个页面
+    return (
+      <RouterLink to={{ path: option.key as string }}>
+        {/* TODO placement not in effect */}
+        <NEllipsis tooltip={{ placement: 'right', contentStyle: { maxWidth: 300 } }}>
+          {option.label}
+        </NEllipsis>
+      </RouterLink>
+    );
   }
-  return option.label;
+  return <NEllipsis>{option.label}</NEllipsis>;
 };
 
 const collapsed = ref(false);

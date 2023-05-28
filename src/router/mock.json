@@ -10,25 +10,71 @@
       "children": []
     },
     {
-      "path": "/DataEntry",
+      "path": "/Nested",
       "meta": {
-        "icon": "sidebar-chart",
-        "title": "数据录入"
+        "icon": "sidebar-dashboard",
+        "title": "嵌套路由"
       },
       "children": [
         {
-          "path": "/DataEntry/Form",
+          "path": "/Nested/N1",
           "meta": {
             "icon": "",
-            "title": "基础表单"
-          }
+            "title": "嵌套路由1-1"
+          },
+          "children": [
+            {
+              "path": "/Nested/N1/N2",
+              "meta": {
+                "icon": "",
+                "title": "嵌套路由1-2"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/NestIsPage",
+      "meta": {
+        "icon": "sidebar-chart",
+        "title": "嵌套子页面可点击"
+      },
+      "children": [
+        {
+          "path": "/NestIsPage/Page1",
+          "meta": {
+            "icon": "",
+            "title": "页面一",
+            "isPage": true
+          },
+          "children": [
+            {
+              "path": "/NestIsPage/Page1/Detail",
+              "meta": {
+                "icon": "",
+                "title": "页面一详情",
+                "hideInMenu": true
+              }
+            }
+          ]
         },
         {
-          "path": "/DataEntry/Search",
+          "path": "/NestIsPage/Page2",
           "meta": {
             "icon": "",
-            "title": "搜索栏"
-          }
+            "title": "页面二",
+            "isPage": true
+          },
+          "children": [
+            {
+              "path": "/NestIsPage/Page2/Sub",
+              "meta": {
+                "icon": "",
+                "title": "页面二子页面"
+              }
+            }
+          ]
         }
       ]
     }
@@ -41,9 +87,9 @@
   ],
   "otherPage": [
     {
-      "path": "/Demo/Details",
+      "path": "/OtherPage",
       "meta": {
-        "title": "测试详情",
+        "title": "其他页面",
         "hideTab": true
       }
     }

@@ -50,7 +50,6 @@ export const usePermissionStore = defineStore('permission', () => {
       return { ...meta };
     };
     const modules = import.meta.glob('../views/**/*.vue');
-    console.log('modules: ', modules);
     const generateRoute = (item: MenuItemType, parentPath?: string) => {
       return {
         path: camel2kebab(item.path ?? ''),
@@ -81,23 +80,27 @@ export const usePermissionStore = defineStore('permission', () => {
         if (item.redirect) route.redirect = item.redirect;
         // 多判断 !item.children，如果不写的话，仅当 item.children 为 [] 时，会进入 if 语句
         if (!item.children || item.children?.length === 0) routes?.children?.push(route);
+        if (item.children?.length > 0 && item.meta?.isPage)
+          // 这里要清除子路由，不然会被视为嵌套
+          routes?.children?.push({
+            ...route,
+            children: []
+          });
         menuRouter.push(route);
         flatMenuRoutes.push(route);
       });
       return { flatMenuRoutes, menuRouter };
     };
     const { flatMenuRoutes, menuRouter } = generateRoutes(menus.router);
-    const otherPageRoutes = {
-      path: '/more',
-      component: Layout,
-      children: (menus.otherPage || [])
-        .map((item) => generateRoute(item))
-        .map((item) => ({ ...item, meta: generateMeta(item.meta) }))
-    };
 
-    if (otherPageRoutes.children.length > 0) {
+    // 表示不会出现在 layout 之中，也就是没有头部和侧边的独立页面
+    const otherPageRoutes = (menus.otherPage || [])
+      .map((item) => generateRoute(item))
+      .map((item) => ({ ...item, meta: generateMeta(item.meta) }));
+
+    if (otherPageRoutes.length > 0) {
       // 如果有详情页的路由则加入
-      router.addRoute(otherPageRoutes);
+      otherPageRoutes.forEach((route) => router.addRoute(route));
     }
     if (routes.children && routes.children.length > 0) {
       // 如果有菜单的路由则加入
@@ -112,6 +115,7 @@ export const usePermissionStore = defineStore('permission', () => {
       setMenuList(menuRouter);
       setFlatMenuList(flatMenuRoutes);
     }
+    console.log(router.getRoutes(), routes);
   };
   const initRoutes = async () => {
     if (import.meta.env.VITE_USE_MOCK_DATA === 'true') {
