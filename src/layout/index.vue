@@ -1,34 +1,30 @@
 <script setup lang="ts">
-import { MoonOutline, SunnyOutline, PersonCircleOutline } from '@vicons/ionicons5';
 import Sider from './components/Sider.vue';
-import { isDark, toggleDark } from '@/composables/dark';
+import Header from './components/Header.vue';
+import { usePermissionStore } from '@/stores/permission';
+
+const permissionStore = usePermissionStore();
+const include = computed(() => {
+  return Array.from(permissionStore.cachedPages);
+});
 </script>
 
 <template>
   <div class="relative h-full">
     <NLayout position="absolute">
-      <NLayoutHeader class="h60 flex items-center justify-between px20" bordered>
-        <div>LOGO</div>
-        <NSpace>
-          <NButton circle @click="toggleDark()">
-            <template #icon>
-              <NIcon>
-                <MoonOutline v-if="isDark" />
-                <SunnyOutline v-else />
-              </NIcon>
-            </template>
-          </NButton>
-          <NButton circle>
-            <template #icon>
-              <NIcon><PersonCircleOutline /></NIcon>
-            </template>
-          </NButton>
-        </NSpace>
-      </NLayoutHeader>
+      <Header />
       <NLayout has-sider position="absolute" style="top: 60px">
         <Sider />
         <NLayoutContent :native-scrollbar="false" embedded content-style="padding: 16px;">
-          <RouterView />
+          <RouterView>
+            <template #default="{ Component }">
+              <Transition mode="out-in" name="fade">
+                <KeepAlive :include="include">
+                  <Component :is="Component" />
+                </KeepAlive>
+              </Transition>
+            </template>
+          </RouterView>
         </NLayoutContent>
       </NLayout>
     </NLayout>
