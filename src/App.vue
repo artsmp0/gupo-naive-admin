@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { zhCN, dateZhCN, NThemeEditor, darkTheme } from 'naive-ui';
 import { themeOverrides } from './constants';
-import { isDark } from './composables/dark';
+import { isDark } from './composables';
 
 const isDev = computed(() => import.meta.env.DEV);
 

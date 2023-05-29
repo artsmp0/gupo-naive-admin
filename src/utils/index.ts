@@ -1,4 +1,4 @@
-export * from './discrete';
+export * from './echarts';
 
 export const camel2kebab = (str: string) => str && str.replace(/\B([A-Z])/g, '-$1').toLowerCase();
 

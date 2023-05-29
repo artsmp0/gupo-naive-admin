@@ -8,12 +8,13 @@ import {
   Contract,
   CreateOutline
 } from '@vicons/ionicons5';
-import { isDark, toggleDark } from '@/composables/dark';
+import { isDark, toggleDark } from '@/composables';
 import { useFullscreen } from '@vueuse/core';
 import { NAvatar, NIcon, NText } from 'naive-ui';
 import { useUserStore } from '@/stores/user';
 import Breadcrumbs from './Breadcrumbs.vue';
-import { isDdOrZzd, useDiscrete } from '@/utils';
+import { useDiscrete } from '@/composables';
+import { isDdOrZzd } from '@/utils';
 import type { DropdownMixedOption } from 'naive-ui/es/dropdown/src/interface';
 
 const { toggle, isFullscreen } = useFullscreen(document.body);

@@ -1,4 +1,4 @@
-import { isDark } from '@/composables/dark';
+import { isDark } from '@/composables';
 import { createDiscreteApi, darkTheme, lightTheme, type ConfigProviderProps } from 'naive-ui';
 
 const configProviderPropsRef = computed<ConfigProviderProps>(() => ({

@@ -2,8 +2,9 @@
 import type { AxiosResponse } from 'axios';
 import { type BaseRes, ResponseCode } from '../types';
 import router from '@/router';
+import { useDiscrete } from '@/composables';
 import { useUserStore } from '@/stores/user';
-import { isDdOrZzd, useDiscrete } from '@/utils';
+import { isDdOrZzd } from '@/utils';
 import { NButton } from 'naive-ui';
 
 let alreadyShowError = false;

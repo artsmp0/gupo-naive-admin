@@ -2,7 +2,7 @@ import router from '@/router';
 import { useUserStore, type AuthQuery } from '@/stores/user';
 import { usePermissionStore } from '@/stores/permission';
 import { useTitle } from '@vueuse/core';
-import { useDiscrete } from '@/utils';
+import { useDiscrete } from '@/composables';
 
 const { loadingBar } = useDiscrete();
 
