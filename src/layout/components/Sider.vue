@@ -41,18 +41,12 @@ const renderIcon: any = (option: GupoMenuOption) => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const renderLabel: any = (option: GupoMenuOption) => {
+  const el = <NEllipsis tooltip={{ placement: 'right', flip: false }}>{option.label}</NEllipsis>;
   if (!option.children || option.meta.isPage) {
     // 没有 children 说明一定是页面，isPage 标识打上也表示一定是个页面
-    return (
-      <RouterLink to={{ path: option.key as string }}>
-        {/* TODO placement not in effect */}
-        <NEllipsis tooltip={{ placement: 'right', contentStyle: { maxWidth: 300 } }}>
-          {option.label}
-        </NEllipsis>
-      </RouterLink>
-    );
+    return <RouterLink to={{ path: option.key as string }}>{el}</RouterLink>;
   }
-  return <NEllipsis>{option.label}</NEllipsis>;
+  return el;
 };
 
 const collapsed = ref(false);
