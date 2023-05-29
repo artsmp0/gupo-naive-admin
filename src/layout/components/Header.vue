@@ -5,18 +5,33 @@ import {
   LogOutOutline,
   Expand,
   ReloadOutline,
-  Contract
+  Contract,
+  CreateOutline
 } from '@vicons/ionicons5';
 import { isDark, toggleDark } from '@/composables/dark';
 import { useFullscreen } from '@vueuse/core';
 import { NAvatar, NIcon, NText } from 'naive-ui';
 import { useUserStore } from '@/stores/user';
 import Breadcrumbs from './Breadcrumbs.vue';
+import { isDdOrZzd, useDiscrete } from '@/utils';
+import type { DropdownMixedOption } from 'naive-ui/es/dropdown/src/interface';
 
 const { toggle, isFullscreen } = useFullscreen(document.body);
 
 const reload = () => {
   location.reload();
+};
+const { dialog } = useDiscrete();
+const logout = () => {
+  dialog.warning({
+    title: '退出系统',
+    content: '你确定退出登录？',
+    positiveText: '确定',
+    negativeText: '取消',
+    onPositiveClick: () => {
+      userStore.logout();
+    }
+  });
 };
 
 const renderIcon = (icon: Component) => {
@@ -43,32 +58,46 @@ function renderCustomHeader() {
         { default: () => 'A' }
       ),
       h('div', null, [
-        h('div', null, [h(NText, { depth: 2 }, { default: () => '打工仔' })]),
+        h('div', null, [
+          h(NText, { depth: 2 }, { default: () => userStore.userInfo?.name || '打工仔' })
+        ]),
         h('div', { style: 'font-size: 12px;' }, [
-          h(NText, { depth: 3 }, { default: () => '毫无疑问，你是办公室里最亮的星' })
+          h(
+            NText,
+            { depth: 3 },
+            { default: () => userStore.userInfo?.phone || '毫无疑问，你是办公室里最亮的星' }
+          )
         ])
       ])
     ]
   );
 }
 
-const userOptions = [
+const userOptions: DropdownMixedOption[] = [
   {
     key: 'header',
     type: 'render',
     render: renderCustomHeader
   },
   {
+    label: '编辑信息',
+    key: 'edit',
+    icon: renderIcon(CreateOutline)
+  }
+];
+
+if (!isDdOrZzd()) {
+  userOptions.push({
     label: '退出登录',
     key: 'logout',
     icon: renderIcon(LogOutOutline)
-  }
-];
+  });
+}
 
 const userStore = useUserStore();
 const onSelect = (key: string) => {
   if (key === 'logout') {
-    userStore.logout();
+    logout();
   }
 };
 
