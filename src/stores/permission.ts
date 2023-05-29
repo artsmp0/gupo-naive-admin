@@ -115,7 +115,6 @@ export const usePermissionStore = defineStore('permission', () => {
       setMenuList(menuRouter);
       setFlatMenuList(flatMenuRoutes);
     }
-    console.log(router.getRoutes(), routes);
   };
   const initRoutes = async () => {
     if (import.meta.env.VITE_USE_MOCK_DATA === 'true') {

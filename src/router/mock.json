@@ -10,6 +10,14 @@
       "children": []
     },
     {
+      "path": "/Table",
+      "meta": {
+        "icon": "sidebar-dashboard",
+        "title": "表格"
+      },
+      "children": []
+    },
+    {
       "path": "/Nested",
       "meta": {
         "icon": "sidebar-dashboard",

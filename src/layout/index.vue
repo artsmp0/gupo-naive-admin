@@ -15,7 +15,7 @@ const include = computed(() => {
       <Header />
       <NLayout has-sider position="absolute" style="top: 60px">
         <Sider />
-        <NLayoutContent :native-scrollbar="false" embedded content-style="padding: 16px;">
+        <NLayoutContent embedded content-style="padding: 16px;">
           <RouterView>
             <template #default="{ Component }">
               <Transition mode="out-in" name="fade">
