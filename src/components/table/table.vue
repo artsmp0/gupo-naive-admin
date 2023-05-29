@@ -1,6 +1,5 @@
 <!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script setup lang="ts">
-import type { SortState } from 'naive-ui/es/data-table/src/interface';
 import type { GupoTableProps } from './table';
 import { useData } from './hooks/useData';
 
@@ -14,14 +13,16 @@ const props = withDefaults(defineProps<GupoTableProps>(), {
     page: 'page',
     pageSize: 'pageSize',
     list: 'data.list'
+  }),
+  sorterKeys: () => ({
+    field: { orderField: 'isAsc', sortField: 'orderByColumn' },
+    order: { ascend: 'asc', descend: 'desc' }
   })
 });
 
-const { data, loading, pagination, filter, refresh } = useData(() => props as GupoTableProps);
-
-const handleSorterChange = (sorter: SortState | SortState[]) => {
-  console.log('sorter: ', sorter);
-};
+const { data, loading, pagination, filter, refresh, handleSorterChange } = useData(
+  () => props as GupoTableProps
+);
 
 defineExpose({
   loading,

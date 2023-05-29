@@ -18,6 +18,14 @@
       "children": []
     },
     {
+      "path": "/TrueTable",
+      "meta": {
+        "icon": "sidebar-dashboard",
+        "title": "示例接口请求表格"
+      },
+      "children": []
+    },
+    {
       "path": "/Nested",
       "meta": {
         "icon": "sidebar-dashboard",

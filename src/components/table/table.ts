@@ -6,6 +6,12 @@ export type PagerKeys = {
   pageSize: string;
   list: string;
 };
+
+// { field: { orderField: 'isAsc', sortField: 'orderByColumn' }, order: { ascend: 'asc', descend: 'desc' } }
+export type SorterKeys = {
+  field: { sortField: string; orderField: string };
+  order: { ascend: string; descend: string };
+};
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export type GupoTableProps = {
   listApi: (params: any) => Promise<any>;
@@ -13,4 +19,5 @@ export type GupoTableProps = {
   pagerKeys?: PagerKeys;
   pagination?: DataTableProps['pagination'];
   columns: DataTableProps['columns'];
+  sorterKeys?: SorterKeys;
 };
