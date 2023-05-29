@@ -82,7 +82,7 @@ const appName = computed(() => import.meta.env.VITE_APP_TITLE);
       <NTag mr16 :bordered="false" type="error" size="small">{{ appName }}</NTag>
       <Breadcrumbs />
     </div>
-    <NSpace>
+    <NSpace class="shrink-0">
       <NButton circle @click="reload">
         <template #icon>
           <NIcon><ReloadOutline /></NIcon>

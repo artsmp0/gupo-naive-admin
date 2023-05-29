@@ -28,11 +28,14 @@ watch(
 </script>
 
 <template>
-  <NBreadcrumb v-if="data.length > 0" class="display-none! sm:display-flex!" separator="/">
-    <NBreadcrumbItem v-for="item in data" :key="item.path" :clickable="false">{{
-      item.meta?.title
-    }}</NBreadcrumbItem>
-  </NBreadcrumb>
+  <!-- 屏幕宽度小于 640 不显示面包屑 -->
+  <NEllipsis>
+    <NBreadcrumb v-if="data.length > 0" class="display-none! sm:display-flex!" separator="/">
+      <NBreadcrumbItem v-for="item in data" :key="item.path" :clickable="false">{{
+        item.meta?.title
+      }}</NBreadcrumbItem>
+    </NBreadcrumb>
+  </NEllipsis>
 </template>
 
 <style lang="scss" scoped>
