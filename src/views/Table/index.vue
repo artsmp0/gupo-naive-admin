@@ -164,7 +164,7 @@ const test = () => {
       :columns="columns"
       flex-height
       :list-api="getUserList"
-      :pagination="{ pageSlot: 10 }"
+      :pagination="{ pageSlot: 10, pageSize: 30 }"
     />
   </div>
 </template>
