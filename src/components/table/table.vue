@@ -24,6 +24,11 @@ const { data, loading, pagination, filter, refresh, handleSorterChange } = useDa
   () => props as GupoTableProps
 );
 
+const renderCell = (value: string) => {
+  if (!value) return '——';
+  return value;
+};
+
 defineExpose({
   loading,
   filter,
@@ -37,10 +42,11 @@ defineExpose({
       class="h-full"
       remote
       :loading="loading"
-      :columns="props.columns"
+      :columns="(props.columns as any)"
       :data="data"
       :pagination="pagination"
       v-bind="$attrs"
+      :render-cell="renderCell"
       @update:sorter="handleSorterChange"
     >
     </NDataTable>

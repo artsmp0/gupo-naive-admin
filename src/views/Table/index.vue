@@ -1,8 +1,8 @@
 <!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script setup lang="tsx">
 import GupoTable from '@/components/table';
-import { FlashOutline } from '@vicons/ionicons5';
-import { NButton, type DataTableColumns, NTag } from 'naive-ui';
+import { FlashOutline, HelpCircleOutline } from '@vicons/ionicons5';
+import { NButton, type DataTableColumns, NTag, NIcon, NTooltip } from 'naive-ui';
 
 interface User {
   name: string;
@@ -35,7 +35,23 @@ const getUserList = shallowRef((params: any) => {
 const columns: DataTableColumns<User> = [
   {
     key: 'name',
-    title: '姓名'
+    title: () => {
+      return (
+        <div class={'flex items-center'}>
+          <span class={'mr4'}>姓名</span>
+          <NTooltip trigger="hover" style={'max-width: 200px;font-size:12px'}>
+            {{
+              trigger: () => (
+                <NIcon size={18}>
+                  <HelpCircleOutline />
+                </NIcon>
+              ),
+              default: () => '如果它长得像鸭子，走起来像鸭子，叫起来也像鸭子，那它一定是个鸭子'
+            }}
+          </NTooltip>
+        </div>
+      );
+    }
   },
   {
     key: 'age',

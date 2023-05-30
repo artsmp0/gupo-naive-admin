@@ -1,11 +1,11 @@
 <!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script setup lang="tsx">
 import GupoTable, { useTableListApi } from '@/components/table';
-import { type DataTableColumns } from 'naive-ui';
 import type { TableItem } from '@/api/apis/common';
 import { APIS } from '@/api';
+import type { TableColumns } from '@/components/table/table';
 
-const columns: DataTableColumns<TableItem> = [
+const columns: TableColumns<TableItem> = [
   {
     key: 'name',
     width: 200,

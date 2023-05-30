@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { RowData, Sorter } from 'naive-ui/es/data-table/src/interface';
+import type { RowData } from 'naive-ui/es/data-table/src/interface';
 import type { GupoTableProps } from '../table';
 import type { DataTableSortState } from 'naive-ui';
 

@@ -1,4 +1,4 @@
-import type { DataTableProps } from 'naive-ui';
+import type { DataTableBaseColumn, DataTableProps } from 'naive-ui';
 
 export type PagerKeys = {
   total: string;
@@ -21,3 +21,7 @@ export type GupoTableProps = {
   columns: DataTableProps['columns'];
   sorterKeys?: SorterKeys;
 };
+
+export type TableColumns<T extends any> = (Omit<DataTableBaseColumn, 'key'> & {
+  key: keyof T | 'operation';
+})[];
