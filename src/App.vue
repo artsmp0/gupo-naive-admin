@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { zhCN, dateZhCN, NThemeEditor, darkTheme } from 'naive-ui';
-import { themeOverrides } from './constants';
+import { THEME_OVERRIDES } from './constants';
 import { isDark } from './composables';
 
 const isDev = computed(() => import.meta.env.DEV);
@@ -15,7 +15,7 @@ const currentTheme = computed(() => {
     :locale="zhCN"
     :theme="currentTheme"
     :date-locale="dateZhCN"
-    :theme-overrides="themeOverrides"
+    :theme-overrides="THEME_OVERRIDES"
   >
     <RouterView />
     <NThemeEditor v-if="isDev"> </NThemeEditor>

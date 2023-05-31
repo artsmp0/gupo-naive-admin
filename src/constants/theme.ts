@@ -1,5 +1,5 @@
 import type { GlobalThemeOverrides } from 'naive-ui';
 
-export const themeOverrides: GlobalThemeOverrides = {
+export const THEME_OVERRIDES: GlobalThemeOverrides = {
   common: {}
 };

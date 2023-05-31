@@ -12,6 +12,9 @@ export type SorterKeys = {
   field: { sortField: string; orderField: string };
   order: { ascend: string; descend: string };
 };
+
+export type RightUtils = ('size' | 'fullscreen' | 'reload' | 'setting')[];
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export type GupoTableProps = {
   listApi: (params: any) => Promise<any>;
@@ -20,6 +23,9 @@ export type GupoTableProps = {
   pagination?: DataTableProps['pagination'];
   columns: DataTableProps['columns'];
   sorterKeys?: SorterKeys;
+  selection?: boolean;
+  /** 右侧功能区 */
+  rightUtils?: RightUtils;
 };
 
 export type TableColumns<T extends any> = (Omit<DataTableBaseColumn, 'key'> & {

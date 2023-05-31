@@ -43,15 +43,24 @@ const columns: TableColumns<TableItem> = [
 ];
 const { getList } = useTableListApi(APIS.common['/tag/tb/bind/list'], true);
 const $table = shallowRef();
+
+const getSelectedData = () => {
+  console.log($table.value?.getSelectedData());
+};
 </script>
 
 <template>
   <div flex="~ col" class="h-full">
+    <div class="shrink-0" flex="~ items-center gap-16">
+      <NButton @click="getSelectedData">获取选中数据</NButton>
+    </div>
     <GupoTable
       ref="$table"
       class="flex-1"
+      :row-key="(row: any) => row.urn"
       :columns="columns"
-      flex-height
+      
+       selection flex-height 
       :list-api="getList"
       :pager-keys="{
         list: 'data.data.rows',

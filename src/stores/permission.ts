@@ -81,7 +81,7 @@ export const usePermissionStore = defineStore('permission', () => {
         // 多判断 !item.children，如果不写的话，仅当 item.children 为 [] 时，会进入 if 语句
         if (!item.children || item.children?.length === 0) routes?.children?.push(route);
         if (item.children?.length > 0 && item.meta?.isPage)
-          // 这里要清除子路由，不然会被视为嵌套
+          // 这里要清除子路由，不然会被视为嵌套路由
           routes?.children?.push({
             ...route,
             children: []

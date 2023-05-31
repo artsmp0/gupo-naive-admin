@@ -19,3 +19,13 @@ body,
   margin: 0;
   overflow: hidden;
 }
+
+:fullscreen {
+  background-color: #fff;
+}
+
+html.dark {
+  :fullscreen {
+    background-color: #101014;
+  }
+}

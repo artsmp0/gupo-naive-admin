@@ -37,8 +37,9 @@ export const useData = (propsGetter: () => GupoTableProps) => {
   });
   const data = shallowRef<RowData[]>([]);
   const loading = ref(false);
-
+  /** 缓存当前列表的筛选参数 */
   const cachedParams = ref<any>({});
+  /** 获取数据和筛选数据 */
   const getData = async (params?: any, withOldParams = true) => {
     // 过滤调用重置分页
     if (params) {
@@ -68,7 +69,7 @@ export const useData = (propsGetter: () => GupoTableProps) => {
     }
   };
   getData();
-
+  /** 刷新列表 */
   const refresh = (keepPage = true) => {
     if (keepPage) {
       getData();
@@ -77,7 +78,7 @@ export const useData = (propsGetter: () => GupoTableProps) => {
       getData();
     }
   };
-
+  /** 处理后端多列排序的逻辑 */
   const handleSorterChange = (sorter: DataTableSortState | DataTableSortState[] | null) => {
     let sorterParams: any;
     const sortField = props.sorterKeys!.field.sortField;
@@ -108,7 +109,6 @@ export const useData = (propsGetter: () => GupoTableProps) => {
       ...cachedParams.value,
       ...sorterParams
     };
-    console.log('cachedParams.value: ', cachedParams.value);
     getData();
   };
 

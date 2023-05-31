@@ -40,6 +40,7 @@
     "@tsconfig/node18": "^2.0.1",
     "@types/node": "^20.2.5",
     "@unocss/eslint-config": "^0.52.4",
+    "@vicons/antd": "^0.12.0",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vitejs/plugin-vue-jsx": "^3.0.1",
     "@vue/eslint-config-prettier": "^7.1.0",
