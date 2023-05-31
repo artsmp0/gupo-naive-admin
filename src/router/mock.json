@@ -10,6 +10,15 @@
       "children": []
     },
     {
+      "path": "/UseChart",
+      "meta": {
+        "icon": "sidebar-dashboard",
+        "title": "useChart demo",
+        "keepAlive": true
+      },
+      "children": []
+    },
+    {
       "path": "/Table",
       "meta": {
         "icon": "sidebar-dashboard",

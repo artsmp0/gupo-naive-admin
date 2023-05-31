@@ -80,6 +80,12 @@ export const useData = (propsGetter: () => GupoTableProps) => {
   };
   /** 处理后端多列排序的逻辑 */
   const handleSorterChange = (sorter: DataTableSortState | DataTableSortState[] | null) => {
+    if (!props.sorterKeys) {
+      console.warn(
+        '未传递 sorterKeys props，无法进行远程排序！若本地排序请直接使用 naive ui 自带的表格组件！'
+      );
+      return;
+    }
     let sorterParams: any;
     const sortField = props.sorterKeys!.field.sortField;
     const orderField = props.sorterKeys!.field.orderField;

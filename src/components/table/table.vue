@@ -4,6 +4,11 @@ import type { GupoTableProps } from './table';
 import { useData } from './hooks/useData';
 import type { DataTableRowKey } from 'naive-ui';
 import { useColumn } from './hooks/useColumn';
+/**
+ * 请注意：开启了 remote 选项后，本地排序和过滤会失效！仅能监听 update:sorter 排序
+ * 本组件主要针对远程数据处理进行提效，若要其他功能请直接使用未封装的 table 组件
+ * 请注意：不开启 remote 选项，pagination 的 total 默认直接取的是 data 的 数据长度！
+ */
 
 defineOptions({
   name: 'GupoTable'
@@ -16,10 +21,11 @@ const props = withDefaults(defineProps<GupoTableProps>(), {
     pageSize: 'pageSize',
     list: 'data.list'
   }),
-  sorterKeys: () => ({
-    field: { orderField: 'isAsc', sortField: 'orderByColumn' },
-    order: { ascend: 'asc', descend: 'desc' }
-  }),
+  // 服务端排序才需要开启这个选项
+  // sorterKeys: () => ({
+  //   field: { orderField: 'isAsc', sortField: 'orderByColumn' },
+  //   order: { ascend: 'asc', descend: 'desc' }
+  // }),
   selection: false,
   rightUtils: () => ['size', 'reload', 'fullscreen', 'setting'],
   size: 'medium'

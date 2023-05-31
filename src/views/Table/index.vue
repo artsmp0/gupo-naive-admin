@@ -56,8 +56,13 @@ const columns: DataTableColumns<User> = [
   {
     key: 'age',
     title: '年龄',
-    sorter: true,
-    sortOrder: false
+    sorter: {
+      compare: (row1, row2) => {
+        console.log('row1, row2: ', row1, row2);
+        return row1.age - row2.age;
+      },
+      multiple: 1
+    }
   },
   {
     key: 'male',
