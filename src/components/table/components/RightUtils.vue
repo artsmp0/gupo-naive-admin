@@ -9,11 +9,15 @@ import {
 } from '@vicons/antd';
 import type { RightUtils } from '../table';
 import { useFullscreen } from '@vueuse/core';
+import type { DataTableProps } from 'naive-ui';
 
 const props = defineProps<{
   options: RightUtils;
   wrapper?: HTMLDivElement;
+  reload: (keepPage?: boolean) => void;
 }>();
+
+const size = defineModel<DataTableProps['size']>('size');
 
 type Utils = Record<
   RightUtils[number],
@@ -60,14 +64,41 @@ const handleClick = (key: RightUtils[number]) => {
     case 'fullscreen':
       toggle();
       break;
+    case 'reload':
+      props.reload();
+      break;
   }
 };
+
+// "small" | "medium" | "large" | undefined
+const sizeOptions = [
+  {
+    label: '更小',
+    value: 'small'
+  },
+  {
+    label: '不大',
+    value: 'medium'
+  },
+  {
+    label: '更大',
+    value: 'large'
+  }
+];
 </script>
 
 <template>
   <div flex="~ items-center gap-16">
     <HelpMessage v-for="item in data" :key="item.key" :message="item.tip">
-      <Component :is="item.icon" class="cursor-pointer" @click="handleClick(item.key)" />
+      <NPopselect
+        v-if="item.key === 'size'"
+        v-model:value="size"
+        :options="sizeOptions"
+        trigger="click"
+      >
+        <Component :is="item.icon" class="cursor-pointer outline-none" />
+      </NPopselect>
+      <Component :is="item.icon" v-else class="cursor-pointer" @click="handleClick(item.key)" />
     </HelpMessage>
   </div>
 </template>

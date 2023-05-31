@@ -16,7 +16,11 @@ const iconDirs = [fileURLToPath(new URL('src/assets/icons', import.meta.url))];
 export default defineConfig({
   envDir,
   plugins: [
-    vue(),
+    vue({
+      script: {
+        defineModel: true
+      }
+    }),
     vueJsx(),
     UnoCSS(),
     AutoImport({

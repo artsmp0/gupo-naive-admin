@@ -26,6 +26,7 @@ export type GupoTableProps = {
   selection?: boolean;
   /** 右侧功能区 */
   rightUtils?: RightUtils;
+  size?: DataTableProps['size'];
 };
 
 export type TableColumns<T extends any> = (Omit<DataTableBaseColumn, 'key'> & {

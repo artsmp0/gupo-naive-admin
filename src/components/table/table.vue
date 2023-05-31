@@ -21,7 +21,8 @@ const props = withDefaults(defineProps<GupoTableProps>(), {
     order: { ascend: 'asc', descend: 'desc' }
   }),
   selection: false,
-  rightUtils: () => ['size', 'reload', 'fullscreen', 'setting']
+  rightUtils: () => ['size', 'reload', 'fullscreen', 'setting'],
+  size: 'medium'
 });
 
 const { computedColumns } = useColumn(() => props as GupoTableProps);
@@ -51,6 +52,7 @@ defineExpose({
   refresh,
   getSelectedData
 });
+const size = ref(props.size);
 
 const $tableWrapper = shallowRef<HTMLDivElement>();
 </script>
@@ -67,7 +69,12 @@ const $tableWrapper = shallowRef<HTMLDivElement>();
         </span>
       </div>
       <div>
-        <RightUtils :options="props.rightUtils" :wrapper="$tableWrapper" />
+        <RightUtils
+          v-model:size="size"
+          :options="props.rightUtils"
+          :wrapper="$tableWrapper"
+          :reload="refresh"
+        />
       </div>
     </div>
     <NDataTable
@@ -79,6 +86,7 @@ const $tableWrapper = shallowRef<HTMLDivElement>();
       :pagination="pagination"
       v-bind="$attrs"
       :checked-row-keys="checkedKeys"
+      :size="size"
       @update:sorter="handleSorterChange"
       @update:checked-row-keys="handleCheck"
     >
