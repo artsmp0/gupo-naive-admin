@@ -7,6 +7,7 @@ import type { CSSProperties } from 'vue';
 const props = withDefaults(
   defineProps<{
     labelWidth?: string;
+    loading?: boolean;
   }>(),
   {
     labelWidth: '100px'
@@ -83,6 +84,7 @@ const toggle = () => {
 let defaultModel = cloneDeep(model.value)!;
 const onReset = () => {
   model.value = cloneDeep(defaultModel);
+  onSearch();
 };
 
 const onSearch = () => {
@@ -91,7 +93,7 @@ const onSearch = () => {
 </script>
 
 <template>
-  <NCard size="small">
+  <NCard :content-style="{ padding: '24px 0 0' }">
     <div :style="wrapperStyle">
       <NForm
         ref="$form"
@@ -108,8 +110,10 @@ const onSearch = () => {
           class="absolute bottom-0 right-0 z-10 h58 bg-[--n-color]"
           :style="{ width: searchBoxWidth + 'px', marginRight: '18px' }"
         >
-          <NButton @click="onReset">重置</NButton>
-          <NButton @click="onSearch">查询</NButton>
+          <NButton secondary type="tertiary" :loading="props.loading" @click="onReset">
+            重置
+          </NButton>
+          <NButton type="primary" :loading="props.loading" @click="onSearch">查询</NButton>
           <NButton v-if="isShowToggleBtn" @click="toggle">
             {{ isOpen ? '收起' : '展开' }}
           </NButton>
