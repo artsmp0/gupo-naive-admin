@@ -3,11 +3,10 @@ import {
   MoonOutline,
   SunnyOutline,
   LogOutOutline,
-  Expand,
-  ReloadOutline,
-  Contract,
-  CreateOutline
+  CreateOutline,
+  SettingsOutline
 } from '@vicons/ionicons5';
+import { CompressOutlined, ExpandOutlined, ReloadOutlined } from '@vicons/antd';
 import { isDark, toggleDark } from '@/composables';
 import { useFullscreen } from '@vueuse/core';
 import { NAvatar, NIcon, NText } from 'naive-ui';
@@ -112,21 +111,21 @@ const appName = computed(() => import.meta.env.VITE_APP_TITLE);
       <NTag mr16 :bordered="false" type="error" size="small">{{ appName }}</NTag>
       <Breadcrumbs />
     </div>
-    <NSpace class="shrink-0">
-      <NButton circle @click="reload">
+    <div class="shrink-0" flex="~ items-center gap-16">
+      <NButton circle secondary @click="reload">
         <template #icon>
-          <NIcon><ReloadOutline /></NIcon>
+          <NIcon><ReloadOutlined /></NIcon>
         </template>
       </NButton>
-      <NButton circle @click="toggle">
+      <NButton circle secondary @click="toggle">
         <template #icon>
           <NIcon>
-            <Contract v-if="isFullscreen" />
-            <Expand v-else />
+            <CompressOutlined v-if="isFullscreen" />
+            <ExpandOutlined v-else />
           </NIcon>
         </template>
       </NButton>
-      <NButton circle @click="toggleDark()">
+      <NButton circle secondary @click="toggleDark()">
         <template #icon>
           <NIcon>
             <MoonOutline v-if="isDark" />
@@ -134,9 +133,16 @@ const appName = computed(() => import.meta.env.VITE_APP_TITLE);
           </NIcon>
         </template>
       </NButton>
+      <NButton circle secondary>
+        <template #icon>
+          <NIcon>
+            <SettingsOutline />
+          </NIcon>
+        </template>
+      </NButton>
       <NDropdown :options="userOptions" @select="onSelect">
         <NAvatar round> A </NAvatar>
       </NDropdown>
-    </NSpace>
+    </div>
   </NLayoutHeader>
 </template>

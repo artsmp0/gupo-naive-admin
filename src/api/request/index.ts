@@ -8,28 +8,21 @@ import { resHandler } from './interceptors/resHandler';
 
 export interface MakeRequestFn {
   /** 仅传递接口返回的结果类型 */
-  <Payload = unknown>(config: RequestConfig): (
+  <Payload>(config: RequestConfig): (
     reqConfig?: Partial<RequestConfig>
   ) => Promise<MakeRequestRes<Payload>>;
   /** 传递接口 querystring 请求参数和返回结果类型 */
-  <Payload = unknown, Params = undefined>(
-    config: Partial<Omit<RequestConfig, 'params'>> & { params?: Params }
-  ): (
+  <Payload, Params>(config: Partial<Omit<RequestConfig, 'params'>> & { params?: Params }): (
     reqConfig?: Partial<Omit<RequestConfig, 'params'>> & { params?: Params }
   ) => Promise<MakeRequestRes<Payload>>;
   /** 传递接口 querystring 请求参数或 post data 请求参数和返回结果类型 */
-  <Payload = unknown, Params = undefined, Data = undefined>(
+  <Payload, Params, Data>(
     config: Partial<Omit<RequestConfig<Data>, 'params'>> & { params?: Params }
   ): (
     reqConfig?: Partial<Omit<RequestConfig<Data>, 'params'>> & { params?: Params }
   ) => Promise<MakeRequestRes<Payload>>;
   /** 传递接口 querystring 请求参数或 post data 请求参数或 路径参数 和返回结果类型 */
-  <
-    Payload = unknown,
-    Params = undefined,
-    Data = undefined,
-    ArgsURL extends string | undefined = undefined
-  >(
+  <Payload, Params, Data, ArgsURL extends string | undefined = undefined>(
     config: Partial<Omit<RequestConfig<Data>, 'params' | 'args'>> & {
       params?: Params;
       args?: GetFinalArgs<ArgsURL>;

@@ -19,6 +19,15 @@
       "children": []
     },
     {
+      "path": "/Search",
+      "meta": {
+        "icon": "sidebar-dashboard",
+        "title": "搜索表单",
+        "keepAlive": true
+      },
+      "children": []
+    },
+    {
       "path": "/Table",
       "meta": {
         "icon": "sidebar-dashboard",

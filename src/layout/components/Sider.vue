@@ -4,6 +4,7 @@ import { usePermissionStore, type MenuItemType } from '@/stores/permission';
 import type { RouteMeta } from 'vue-router';
 import SvgIcon from '@/components/SvgIcon.vue';
 import { RouterLink } from 'vue-router';
+import { useWindowSize } from '@vueuse/core';
 
 type GupoMenuOption = MenuOption & {
   name: string;
@@ -49,10 +50,19 @@ const renderLabel: any = (option: GupoMenuOption) => {
   return el;
 };
 
-const collapsed = ref(false);
 const route = useRoute();
 const selectedItem = computed(() => {
   return route.path;
+});
+
+const { width } = useWindowSize();
+const collapsed = ref(false);
+watch(width, (v) => {
+  if (v > 768) {
+    collapsed.value = false;
+  } else {
+    collapsed.value = true;
+  }
 });
 </script>
 
