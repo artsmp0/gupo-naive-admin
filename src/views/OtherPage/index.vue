@@ -3,6 +3,6 @@
 <template>
   <div>
     Other Page
-    <NButton>123123</NButton>
+    <NButton type="primary">123123</NButton>
   </div>
 </template>

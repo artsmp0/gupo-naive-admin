@@ -17,8 +17,9 @@ const currentTheme = computed(() => {
     :date-locale="dateZhCN"
     :theme-overrides="THEME_OVERRIDES"
   >
-    <RouterView />
-    <NThemeEditor v-if="isDev"> </NThemeEditor>
-    <NGlobalStyle />
+    <NThemeEditor v-if="isDev">
+      <RouterView />
+    </NThemeEditor>
+    <RouterView v-else />
   </NConfigProvider>
 </template>

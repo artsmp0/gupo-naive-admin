@@ -73,6 +73,7 @@ onMounted(() => {
 });
 const wrapperStyle = computed<CSSProperties>(() => ({
   overflow: 'hidden',
+  padding: '2px',
   transition: '0.3s',
   position: 'relative',
   height: (isOpen.value ? currentHeight.value : defaultHeight) + 'px'
@@ -95,7 +96,7 @@ const onSearch = () => {
 </script>
 
 <template>
-  <NCard :content-style="{ padding: '24px 0 0 16px' }">
+  <NCard :content-style="{ padding: '22px 0 0 16px' }">
     <div :style="wrapperStyle">
       <NForm
         ref="$form"

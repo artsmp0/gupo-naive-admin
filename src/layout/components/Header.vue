@@ -105,14 +105,14 @@ const appName = computed(() => import.meta.env.VITE_APP_TITLE);
 </script>
 
 <template>
-  <NLayoutHeader class="h60 flex items-center justify-between px20" bordered>
+  <NLayoutHeader class="h60 px20" flex="~ items-center justify-between" bordered>
     <div class="h40" flex="~ justify-center items-center">
       <img src="@/assets/imgs/logo.png" alt="LOGO" class="mr16 h-full" />
       <NTag mr16 :bordered="false" type="error" size="small">{{ appName }}</NTag>
       <Breadcrumbs />
     </div>
     <div class="shrink-0" flex="~ items-center gap-16">
-      <NButton circle secondary @click="reload">
+      <NButton   secondary circle  @click="reload">
         <template #icon>
           <NIcon><ReloadOutlined /></NIcon>
         </template>
