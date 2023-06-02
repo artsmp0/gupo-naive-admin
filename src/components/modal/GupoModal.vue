@@ -2,8 +2,6 @@
 import type { ModalProps } from 'naive-ui';
 import type { ModalMethods } from './types';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-// const props = defineProps();
 const emits = defineEmits(['register', 'close', 'confirm']);
 
 const attrs = useAttrs();
@@ -11,7 +9,6 @@ const propsRef = ref<ModalProps | {}>({});
 const bindValues = computed(() => {
   return {
     ...attrs,
-    // ...props,
     ...propsRef.value
   };
 });
