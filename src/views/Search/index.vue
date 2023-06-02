@@ -26,7 +26,13 @@ const handleSearch = () => {
 
 <template>
   <div>
-    <SearchBar v-model:model="model" mb10 :loading="loading" @search="handleSearch">
+    <SearchBar
+      v-model:model="model"
+      mb10
+      :loading="loading"
+      label-width="70px"
+      @search="handleSearch"
+    >
       <NFormItem ref="el" label="Input" path="text1">
         <NInput v-model:value="model.text1" placeholder="Input" />
       </NFormItem>
@@ -48,6 +54,41 @@ const handleSearch = () => {
         />
       </NFormItem>
       <NFormItem label="范围选择" path="inputValue">
+        <NDatePicker
+          v-model:formatted-value="model.dateRange2"
+          type="daterange"
+          placeholder="Input"
+        />
+      </NFormItem>
+    </SearchBar>
+    <SearchBar
+      v-model:model="model"
+      mb10
+      :loading="loading"
+      min-width="250px"
+      @search="handleSearch"
+    >
+      <NFormItem ref="el" path="text1">
+        <NInput v-model:value="model.text1" placeholder="Input" />
+      </NFormItem>
+      <NFormItem path="text2">
+        <NInput v-model:value="model.text2" placeholder="Input" />
+      </NFormItem>
+      <NFormItem path="date">
+        <NDatePicker
+          v-model:formatted-value="model.date"
+          placeholder="时间选择"
+          value-format="yyyy.MM.dd HH:mm:ss"
+        />
+      </NFormItem>
+      <NFormItem path="dateRange1">
+        <NDatePicker
+          v-model:formatted-value="model.dateRange1"
+          type="daterange"
+          placeholder="Input"
+        />
+      </NFormItem>
+      <NFormItem path="inputValue">
         <NDatePicker
           v-model:formatted-value="model.dateRange2"
           type="daterange"

@@ -8,9 +8,11 @@ const props = withDefaults(
   defineProps<{
     labelWidth?: string;
     loading?: boolean;
+    minWidth?: string;
   }>(),
   {
-    labelWidth: '100px'
+    labelWidth: '100px',
+    minWidth: '320px'
   }
 );
 
@@ -93,7 +95,7 @@ const onSearch = () => {
 </script>
 
 <template>
-  <NCard :content-style="{ padding: '24px 0 0' }">
+  <NCard :content-style="{ padding: '24px 0 0 16px' }">
     <div :style="wrapperStyle">
       <NForm
         ref="$form"
@@ -129,7 +131,7 @@ const onSearch = () => {
 
   .n-form-item {
     flex: 1;
-    min-width: 300px;
+    min-width: v-bind('props.minWidth');
   }
 
   .n-date-picker {
