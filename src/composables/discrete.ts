@@ -2,7 +2,7 @@ import { isDark } from '@/composables';
 import { createDiscreteApi, darkTheme, lightTheme, type ConfigProviderProps } from 'naive-ui';
 
 const configProviderPropsRef = computed<ConfigProviderProps>(() => ({
-  theme: isDark.value ? lightTheme : darkTheme
+  theme: isDark.value ? darkTheme : lightTheme
 }));
 
 const { message, notification, dialog, loadingBar } = createDiscreteApi(

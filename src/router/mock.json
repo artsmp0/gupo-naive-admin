@@ -28,6 +28,15 @@
       "children": []
     },
     {
+      "path": "/Modal",
+      "meta": {
+        "icon": "sidebar-dashboard",
+        "title": "函数模态框",
+        "keepAlive": true
+      },
+      "children": []
+    },
+    {
       "path": "/Table",
       "meta": {
         "icon": "sidebar-dashboard",

@@ -48,6 +48,11 @@ watch(
       margin: 0 2px;
       margin-bottom: 2px;
     }
+
+    // 移除 hover 效果
+    .n-breadcrumb-item__link {
+      pointer-events: none;
+    }
   }
 }
 </style>
