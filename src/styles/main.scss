@@ -1,3 +1,5 @@
+/* stylelint-disable selector-pseudo-element-no-unknow */
+
 html {
   // 方便 unocss 换算，1rem = 4px unocss 是以 0.25rem 为单位
   font-size: 4px;
@@ -28,4 +30,26 @@ html.dark {
   :fullscreen {
     background-color: #101014;
   }
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  mix-blend-mode: normal;
+  animation: none;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 9999;
+}
+
+.dark::view-transition-old(root) {
+  z-index: 9999;
+}
+
+.dark::view-transition-new(root) {
+  z-index: 1;
 }
