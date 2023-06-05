@@ -18,8 +18,10 @@ import type { DropdownMixedOption } from 'naive-ui/es/dropdown/src/interface';
 
 const { toggle, isFullscreen } = useFullscreen(document.body);
 
+const router = useRouter();
+
 const reload = () => {
-  location.reload();
+  router.replace('/redirect' + router.currentRoute.value.fullPath);
 };
 const { dialog } = useDiscrete();
 const logout = () => {
