@@ -7,6 +7,7 @@ import type { Component } from 'vue';
 import { APIS } from '@/api';
 import { useUserStore } from './user';
 import type { RouteLocationNormalized, RouteMeta } from 'vue-router';
+import { fallbackRoutes } from '@/router/fallback-routes';
 
 export type MenuItemType = {
   path: string;
@@ -99,9 +100,10 @@ export const usePermissionStore = defineStore('permission', () => {
       .map((item) => ({ ...item, meta: generateMeta(item.meta) }));
 
     if (otherPageRoutes.length > 0) {
-      // 如果有详情页的路由则加入
+      // otherPageRoutes 表示不需要头部和侧栏的路由
       otherPageRoutes.forEach((route) => router.addRoute(route));
     }
+
     if (routes.children && routes.children.length > 0) {
       // 如果有菜单的路由则加入
       routes.redirect = routes?.children?.[0]?.path;
@@ -110,11 +112,17 @@ export const usePermissionStore = defineStore('permission', () => {
         path: '/:catchAll(.*)',
         redirect: { path: '/404' }
       });
-      // 设置页面展示菜单数组
-      setHasRoute(true);
+
       setMenuList(menuRouter);
       setFlatMenuList(flatMenuRoutes);
     }
+    // 设置页面展示菜单数组
+    setHasRoute(true);
+
+    // 最后加入 fallbackRoutes
+    fallbackRoutes.forEach((route) => {
+      router.addRoute(route);
+    });
   };
   const initRoutes = async () => {
     if (import.meta.env.VITE_USE_MOCK_DATA === 'true') {
@@ -132,7 +140,11 @@ export const usePermissionStore = defineStore('permission', () => {
 
     // 返回登录成功后前往的页面地址
     return {
-      redirectRoute: menuList.value[0]?.children?.[0]?.path || menuList.value[0]?.path || '/'
+      redirectRoute:
+        menuList.value[0]?.children?.[0]?.path ||
+        menuList.value[0]?.path ||
+        camel2kebab(mockData.otherPage?.[0].path) ||
+        '/'
     };
   };
   const getKeepAliveName = (arr: MenuItemType[]) => {
