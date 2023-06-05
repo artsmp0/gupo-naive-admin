@@ -27,6 +27,10 @@ body,
 }
 
 html.dark {
+  --c-bg: #050505;
+  --c-scrollbar: #333;
+  --c-scrollbar-hover: #555;
+
   :fullscreen {
     background-color: #101014;
   }
@@ -52,4 +56,35 @@ html.dark {
 
 .dark::view-transition-new(root) {
   z-index: 1;
+}
+
+// scrollbar
+
+:root {
+  --c-bg: #fafafc;
+  --c-scrollbar: #ddd;
+  --c-scrollbar-hover: #aaa;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 6px;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+  background: var(--c-bg);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--c-scrollbar);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--c-scrollbar-hover);
 }
