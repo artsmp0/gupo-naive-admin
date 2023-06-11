@@ -2384,6 +2384,11 @@ dot-prop@^5.1.0:
   dependencies:
     is-obj "^2.0.0"
 
+dotenv@16.0.3:
+  version "16.0.3"
+  resolved "https://registry.npmmirror.com/dotenv/-/dotenv-16.0.3.tgz#115aec42bac5053db3c456db30cc243a5a836a07"
+  integrity sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==
+
 duplexer@^0.1.2:
   version "0.1.2"
   resolved "https://registry.npmmirror.com/duplexer/-/duplexer-0.1.2.tgz"
@@ -3098,6 +3103,13 @@ graphemer@^1.4.0:
   version "1.4.0"
   resolved "https://registry.npmmirror.com/graphemer/-/graphemer-1.4.0.tgz"
   integrity sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==
+
+gupo-deploy@^1.3.0:
+  version "1.3.0"
+  resolved "https://packages.aliyun.com/5eb3e37038076f00011bcd4a/npm/npm-registry/gupo-deploy/-/gupo-deploy-1.3.0.tgz#1cc566ed36f966816d78e024d6c9b6a709e2e012"
+  integrity sha512-heV5XJP7+M93FLvw0ugFDoXdgPROmDIHg5sUNy+VbmrBTjVUAnBYODoXEPNkVBMMQ7ifyz2VLgfQX7cvo5jnUA==
+  dependencies:
+    dotenv "16.0.3"
 
 gzip-size@^6.0.0:
   version "6.0.0"
