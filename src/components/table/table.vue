@@ -27,12 +27,12 @@ const props = withDefaults(defineProps<GupoTableProps>(), {
   //   order: { ascend: 'asc', descend: 'desc' }
   // }),
   selection: false,
-  rightUtils: () => ['size', 'reload', 'fullscreen', 'setting'],
-  size: 'medium'
+  rightUtils: () => ['size', 'reload', 'fullscreen'],
+  size: 'medium',
+  deepReactive: false
 });
 
 const { computedColumns } = useColumn(() => props as GupoTableProps);
-console.log('computedColumns: ', computedColumns);
 
 const { data, loading, pagination, filter, refresh, handleSorterChange } = useData(
   () => props as GupoTableProps
@@ -56,7 +56,8 @@ defineExpose({
   loading,
   filter,
   refresh,
-  getSelectedData
+  getSelectedData,
+  data
 });
 const size = ref(props.size);
 
@@ -67,6 +68,7 @@ const $tableWrapper = shallowRef<HTMLDivElement>();
   <div ref="$tableWrapper" class="h-full" flex="~ col">
     <div class="py8" flex="~ justify-between items-center">
       <div>
+        <slot name="title" />
         <span v-if="checkedKeys.length" text-gray>
           当前已选中
           <strong class="text-red">{{ checkedKeys.length }}</strong>
@@ -74,7 +76,8 @@ const $tableWrapper = shallowRef<HTMLDivElement>();
           <NButton size="small" type="info" text @click="handleCheck([], [])"> 取消所有 </NButton>
         </span>
       </div>
-      <div>
+      <div flex="~ items-center gap16">
+        <slot name="extra" />
         <RightUtils
           v-model:size="size"
           :options="props.rightUtils"

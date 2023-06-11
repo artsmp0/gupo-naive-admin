@@ -5,7 +5,7 @@ import type { DataTableSortState } from 'naive-ui';
 
 const resolveArg = (result: any, path: string) => {
   return path.split('.').reduce((res, cur) => {
-    return res[cur];
+    return res?.[cur];
   }, result);
 };
 
@@ -35,7 +35,7 @@ export const useData = (propsGetter: () => GupoTableProps) => {
       getData();
     }
   });
-  const data = shallowRef<RowData[]>([]);
+  const data = props.deepReactive ? ref<RowData[]>([]) : shallowRef<RowData[]>([]);
   const loading = ref(false);
   /** 缓存当前列表的筛选参数 */
   const cachedParams = ref<any>({});

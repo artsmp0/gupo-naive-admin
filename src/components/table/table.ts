@@ -27,8 +27,10 @@ export type GupoTableProps = {
   /** 右侧功能区 */
   rightUtils?: RightUtils;
   size?: DataTableProps['size'];
+  /** 对 data 是否采用 ref 包裹还是 shallowRef，一般如果不需要行内编辑，shallowRef 即可，不用深度侦听对象，明显性能会好一些 */
+  deepReactive?: boolean;
 };
 
-export type TableColumns<T extends any> = (Omit<DataTableBaseColumn, 'key'> & {
+export type TableColumns<T extends any> = (Omit<DataTableBaseColumn<T>, 'key'> & {
   key: keyof T | 'operation';
 })[];
