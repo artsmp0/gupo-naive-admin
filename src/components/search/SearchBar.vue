@@ -111,7 +111,7 @@ const onSearch = () => {
         <div
           flex="~ items-start justify-end gap-8 "
           class="absolute bottom-0 right-0 z-10 h58 bg-[--n-color]"
-          :style="{ width: searchBoxWidth + 'px', marginRight: '18px' }"
+          :style="{ width: searchBoxWidth + 'px', marginRight: '20px' }"
         >
           <NButton secondary type="tertiary" :loading="props.loading" @click="onReset">
             重置
@@ -131,6 +131,7 @@ const onSearch = () => {
   flex-wrap: wrap;
 
   .n-form-item {
+    box-sizing: border-box;
     flex: 1;
     min-width: v-bind('props.minWidth');
   }

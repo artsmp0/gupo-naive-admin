@@ -1,5 +1,13 @@
 /* stylelint-disable selector-pseudo-element-no-unknow */
 
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
 html {
   // 方便 unocss 换算，1rem = 4px unocss 是以 0.25rem 为单位
   font-size: 4px;
