@@ -1,12 +1,6 @@
-/* stylelint-disable selector-pseudo-element-no-unknow */
+@import './transition/index';
 
-*,
-*::after,
-*::before {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
+/* stylelint-disable selector-pseudo-element-no-unknow */
 
 html {
   // 方便 unocss 换算，1rem = 4px unocss 是以 0.25rem 为单位
@@ -35,9 +29,9 @@ body,
 }
 
 html.dark {
-  --c-bg: #050505;
-  --c-scrollbar: #333;
-  --c-scrollbar-hover: #555;
+  --c-bg: #05050533;
+  --c-scrollbar: #444;
+  --c-scrollbar-hover: #666;
 
   :fullscreen {
     background-color: #101014;

@@ -18,7 +18,7 @@ const include = computed(() => {
         <NLayoutContent embedded content-style="padding: 16px;">
           <RouterView>
             <template #default="{ Component }">
-              <Transition mode="out-in" name="fade">
+              <Transition mode="out-in" name="fade-up">
                 <KeepAlive :include="include">
                   <Component :is="Component" />
                 </KeepAlive>
