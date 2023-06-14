@@ -17,11 +17,10 @@ const props = withDefaults(
 );
 
 const emits = defineEmits<{
-  search: [];
+  (e: 'search'): void;
 }>();
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const model = defineModel<Record<string, any>>('model');
+const model = defineModel<Record<string, unknown>>('model');
 
 const defaultHeight = 58;
 const emptyBoxCount = ref(1);
@@ -38,6 +37,7 @@ onActivated(() => {
 });
 const totalRealCount = ref(0);
 onMounted(() => {
+  // 真实的表单控件个数
   totalRealCount.value = ($form.value!.$el as HTMLDivElement).childElementCount - 1;
   useResizeObserver($form.value?.$el, (entries) => {
     if (controlObserver.value) return;
@@ -73,7 +73,7 @@ onMounted(() => {
 });
 const wrapperStyle = computed<CSSProperties>(() => ({
   overflow: 'hidden',
-  padding: '2px',
+  padding: '2px', // 防止水波纹看不到
   transition: '0.3s',
   position: 'relative',
   height: (isOpen.value ? currentHeight.value : defaultHeight) + 'px'
@@ -83,7 +83,6 @@ const toggle = () => {
   isOpen.value = !isOpen.value;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let defaultModel = cloneDeep(model.value)!;
 const onReset = () => {
   model.value = cloneDeep(defaultModel);
@@ -97,7 +96,7 @@ const onSearch = () => {
 
 <template>
   <NCard :content-style="{ padding: '22px 0 0 16px' }">
-    <div :style="wrapperStyle">
+    <div :style="wrapperStyle" @keyup.enter="onSearch">
       <NForm
         ref="$form"
         class="search-form"

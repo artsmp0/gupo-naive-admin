@@ -40,6 +40,7 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchBar: typeof import('./../src/components/search/SearchBar.vue')['default']
+    SearchForm: typeof import('./../src/components/search/SearchForm.vue')['default']
     SvgIcon: typeof import('./../src/components/SvgIcon.vue')['default']
     Table: typeof import('./../src/components/table/table.vue')['default']
   }

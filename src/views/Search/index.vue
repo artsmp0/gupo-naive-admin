@@ -26,7 +26,7 @@ const handleSearch = () => {
 
 <template>
   <div>
-    <SearchBar
+    <SearchForm
       v-model:model="model"
       mb10
       :loading="loading"
@@ -60,8 +60,8 @@ const handleSearch = () => {
           placeholder="Input"
         />
       </NFormItem>
-    </SearchBar>
-    <SearchBar
+    </SearchForm>
+    <SearchForm
       v-model:model="model"
       mb10
       :loading="loading"
@@ -95,7 +95,10 @@ const handleSearch = () => {
           placeholder="Input"
         />
       </NFormItem>
-    </SearchBar>
-    <NCard> 123123 </NCard>
+    </SearchForm>
+    <NCard>
+      <div class="text-[var(--error-color)]">这里通常放个表格</div>
+      <div class="text-[var(--warning-color)]">表格通常设置 `flex-height`，以自适应容器高度</div>
+    </NCard>
   </div>
 </template>
