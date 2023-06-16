@@ -2,6 +2,7 @@
 import Sider from './components/Sider.vue';
 import Header from './components/Header.vue';
 import { usePermissionStore } from '@/stores/permission';
+import Tabs from './components/Tabs.vue';
 
 const permissionStore = usePermissionStore();
 const include = computed(() => {
@@ -15,16 +16,23 @@ const include = computed(() => {
       <Header />
       <NLayout has-sider position="absolute" style="top: 60px">
         <Sider />
-        <NLayoutContent embedded content-style="padding: 16px;">
-          <RouterView>
-            <template #default="{ Component }">
-              <Transition mode="out-in" name="fade-up">
-                <KeepAlive :include="include">
-                  <Component :is="Component" />
-                </KeepAlive>
-              </Transition>
-            </template>
-          </RouterView>
+        <NLayoutContent embedded :content-style="{ height: '100%', overflow: 'hidden' }">
+          <div class="h-full flex flex-col">
+            <Tabs />
+            <div class="flex-1 of-auto">
+              <NScrollbar>
+                <RouterView>
+                  <template #default="{ Component }">
+                    <Transition mode="out-in" name="fade-up">
+                      <KeepAlive :include="include">
+                        <Component :is="Component" />
+                      </KeepAlive>
+                    </Transition>
+                  </template>
+                </RouterView>
+              </NScrollbar>
+            </div>
+          </div>
         </NLayoutContent>
       </NLayout>
     </NLayout>
