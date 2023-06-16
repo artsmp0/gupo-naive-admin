@@ -7,7 +7,7 @@ export default defineConfig({
   rules: [],
   // https://unocss.dev/config/shortcuts
   shortcuts: {
-    border: 'border-solid border-gray/50 border-1',
+    'border-base': 'border-solid dark:border-white/9 border-[rgb(239, 239, 245)]'
   },
   theme: {
     colors: {
