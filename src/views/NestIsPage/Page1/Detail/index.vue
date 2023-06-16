@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div>
+  <div p16>
     <span class="text-16 text-red">
       当配置了
       <NText code> "hideInMenu": true </NText>

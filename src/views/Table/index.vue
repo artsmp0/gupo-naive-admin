@@ -146,7 +146,7 @@ const test = () => {
 </script>
 
 <template>
-  <div flex="~ col" class="h-full">
+  <div flex="~ col" class="h-full p16">
     <div class="mb16 shrink-0" flex="~ gap10">
       <NInput
         v-model:value="filterText"

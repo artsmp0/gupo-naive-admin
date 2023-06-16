@@ -50,7 +50,7 @@ const getSelectedData = () => {
 </script>
 
 <template>
-  <div flex="~ col" class="h-full">
+  <div flex="~ col" class="h-full p16">
     <div class="shrink-0" flex="~ items-center gap-16">
       <NButton @click="getSelectedData">获取选中数据</NButton>
     </div>
@@ -59,8 +59,12 @@ const getSelectedData = () => {
       class="flex-1"
       :row-key="(row: any) => row.urn"
       :columns="columns"
+      :sorter-keys="{
+        field: { orderField: 'isAsc', sortField: 'orderByColumn' },
+        order: { ascend: 'asc', descend: 'desc' }
+      }"
       
-       selection flex-height 
+       flex-height selection 
       :list-api="getList"
       :pager-keys="{
         list: 'data.data.rows',

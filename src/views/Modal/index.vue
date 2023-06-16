@@ -61,7 +61,7 @@ const update = () => {
 </script>
 
 <template>
-  <div>
+  <div p16>
     <NSpace>
       <NButton @click="modal.open()">打开</NButton>
       <NButton @click="modal2.open()">打开2</NButton>

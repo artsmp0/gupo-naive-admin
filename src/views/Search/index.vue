@@ -25,7 +25,7 @@ const handleSearch = () => {
 </script>
 
 <template>
-  <div>
+  <div p16>
     <SearchForm
       v-model:model="model"
       mb10

@@ -163,9 +163,11 @@ setOptions({
 </script>
 
 <template>
-  <NCard>
-    <div ref="contentChartRef" class="h-[300px]"></div>
-  </NCard>
+  <div p16>
+    <NCard>
+      <div ref="contentChartRef" class="h-[300px]"></div>
+    </NCard>
+  </div>
 </template>
 
 <style lang="scss">

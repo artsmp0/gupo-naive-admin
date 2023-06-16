@@ -20,17 +20,15 @@ const include = computed(() => {
           <div class="h-full flex flex-col">
             <Tabs />
             <div class="flex-1 of-auto">
-              <NScrollbar>
-                <RouterView>
-                  <template #default="{ Component }">
-                    <Transition mode="out-in" name="fade-up">
-                      <KeepAlive :include="include">
-                        <Component :is="Component" />
-                      </KeepAlive>
-                    </Transition>
-                  </template>
-                </RouterView>
-              </NScrollbar>
+              <RouterView>
+                <template #default="{ Component }">
+                  <Transition mode="out-in" name="fade-up">
+                    <KeepAlive :include="include">
+                      <Component :is="Component" />
+                    </KeepAlive>
+                  </Transition>
+                </template>
+              </RouterView>
             </div>
           </div>
         </NLayoutContent>

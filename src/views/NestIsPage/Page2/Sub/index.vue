@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div>
+  <div p16>
     <div>这是页面二的嵌套页面，页面二也是一个页面喔，你可以点击他的名称试试~~</div>
     <div class="w100">
       <!-- TODO 在 NEllipsis 中无法 设置 tooltip style  -->
