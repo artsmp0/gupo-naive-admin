@@ -4,6 +4,12 @@ import setting from '@/config.json';
 type SettingKey = keyof typeof setting;
 export const useSettingStore = defineStore('setting', () => {
   const defaultSetting = ref(setting);
+  const collapsed = ref(false);
+
+  const toggleCollapsed = () => {
+    collapsed.value = !collapsed.value;
+    console.log('collapsed.value: ', collapsed.value);
+  };
 
   const settingMap = ref<
     { key: SettingKey; label: string; type: 'switch' | 'select' | 'inputNumber' | 'input' }[]
@@ -57,6 +63,8 @@ export const useSettingStore = defineStore('setting', () => {
 
   return {
     defaultSetting,
-    settingMap
+    settingMap,
+    collapsed,
+    toggleCollapsed
   };
 });

@@ -6,7 +6,7 @@ import {
   CreateOutline,
   SettingsOutline
 } from '@vicons/ionicons5';
-import { CompressOutlined, ExpandOutlined, ReloadOutlined } from '@vicons/antd';
+import { BarsOutlined, CompressOutlined, ExpandOutlined, ReloadOutlined } from '@vicons/antd';
 import { useFullscreen } from '@vueuse/core';
 import { NAvatar, NIcon, NText } from 'naive-ui';
 import { useUserStore } from '@/stores/user';
@@ -107,44 +107,23 @@ const onSelect = (key: string) => {
 // 设置
 const showSettings = ref<boolean>(false);
 const settingStore = useSettingStore();
-const SHOW_REFRESH_BTN = computed(() => settingStore.defaultSetting.SHOW_REFRESH_BTN);
-const SHOW_THEME_BTN = computed(() => settingStore.defaultSetting.SHOW_THEME_BTN);
 const SHOW_AVATAR = computed(() => settingStore.defaultSetting.SHOW_AVATAR);
-const SHOW_BREADCRUMB = computed(() => settingStore.defaultSetting.SHOW_BREADCRUMB);
-const SHOW_FULLSCREEN_BTN = computed(() => settingStore.defaultSetting.SHOW_FULLSCREEN_BTN);
 const APP_NAME = computed(() => settingStore.defaultSetting.APP_NAME);
 </script>
 
 <template>
-  <NLayoutHeader class="h60 px20" flex="~ items-center justify-between" bordered>
-    <div class="h40" flex="~ justify-center items-center">
-      <img src="@/assets/imgs/logo.png" alt="LOGO" class="mr16 h-full" />
-      <NTag mr16 :bordered="false" :color="{ textColor: 'var(--primary-color)' }" size="small">{{
-        APP_NAME
-      }}</NTag>
-      <Breadcrumbs v-if="SHOW_BREADCRUMB" />
+  <NLayoutHeader class="h54 bg-primary px20 text-white" flex="~ items-center " bordered>
+    <div class="w176 text-20 font-semibold">
+      {{ APP_NAME }}
     </div>
-    <div class="shrink-0" flex="~ items-center gap-16">
-      <NButton v-if="SHOW_REFRESH_BTN" secondary circle @click="reload">
-        <template #icon>
-          <NIcon><ReloadOutlined /></NIcon>
-        </template>
-      </NButton>
-      <NButton v-if="SHOW_FULLSCREEN_BTN" circle secondary @click="toggle">
-        <template #icon>
-          <NIcon>
-            <CompressOutlined v-if="isFullscreen" />
-            <ExpandOutlined v-else />
-          </NIcon>
-        </template>
-      </NButton>
-      <NButton circle secondary @click="showSettings = true">
-        <template #icon>
-          <NIcon>
-            <SettingsOutline />
-          </NIcon>
-        </template>
-      </NButton>
+    <div class="divider"></div>
+    <div ml24>
+      <div class="gupo-button" @click="settingStore.toggleCollapsed">
+        <NIcon size="22"><BarsOutlined /></NIcon>
+      </div>
+    </div>
+    <div class="ml-auto shrink-0" flex="~ items-center gap-16">
+      <div>{{ userStore.userInfo?.name || '打工仔' }}</div>
       <NDropdown v-if="SHOW_AVATAR" :options="userOptions" @select="onSelect">
         <NAvatar round> A </NAvatar>
       </NDropdown>
@@ -152,3 +131,24 @@ const APP_NAME = computed(() => settingStore.defaultSetting.APP_NAME);
     <Settings v-model:show="showSettings" />
   </NLayoutHeader>
 </template>
+
+<style lang="scss" scoped>
+.divider {
+  width: 1px;
+  height: 70%;
+  background: linear-gradient(0deg, var(--primary-color), #fff, var(--primary-color));
+}
+
+.gupo-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  font-size: 18px;
+  color: #fff;
+  cursor: pointer;
+  background: rgb(255 255 255 / 30%);
+  border-radius: 4px;
+}
+</style>

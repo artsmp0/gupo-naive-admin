@@ -57,16 +57,16 @@ const selectedItem = computed(() => {
 });
 
 const { width } = useWindowSize();
-const collapsed = ref(false);
-watch(width, (v) => {
-  if (v > 768) {
-    collapsed.value = false;
-  } else {
-    collapsed.value = true;
-  }
-});
-
 const settingStore = useSettingStore();
+// const collapsed = ref(settingStore.collapsed);
+// watch(width, (v) => {
+//   if (v > 768) {
+//     collapsed.value = false;
+//   } else {
+//     collapsed.value = true;
+//   }
+// });
+
 const SIDE_WIDTH = computed(() => settingStore.defaultSetting.SIDE_WIDTH);
 </script>
 
@@ -76,18 +76,15 @@ const SIDE_WIDTH = computed(() => settingStore.defaultSetting.SIDE_WIDTH);
     collapse-mode="width"
     :collapsed-width="64"
     :width="SIDE_WIDTH"
-    :collapsed="collapsed"
+    :collapsed="settingStore.collapsed"
     :native-scrollbar="false"
-    show-trigger
-    @collapse="collapsed = true"
-    @expand="collapsed = false"
   >
     <NMenu
       :value="selectedItem"
       :collapsed-width="64"
       :collapsed-icon-size="22"
       :options="menuOptions"
-      :collapsed="collapsed"
+      :collapsed="settingStore.collapsed"
       :render-icon="renderIcon"
       :render-label="renderLabel"
     />
@@ -105,6 +102,10 @@ const SIDE_WIDTH = computed(() => settingStore.defaultSetting.SIDE_WIDTH);
   }
 
   .n-menu-item-content {
+    &::before {
+      // box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    }
+
     &:not(.n-menu-item-content--selected):hover {
       &::before {
         background-color: #e7f2fb !important;
@@ -139,36 +140,7 @@ const SIDE_WIDTH = computed(() => settingStore.defaultSetting.SIDE_WIDTH);
   }
 }
 
-// .n-menu .n-menu-item-content.n-menu-item-content--selected::before {
-//   background-color: var(--primary-color);
-// }
-
-// .n-menu
-//   .n-menu-item-content:not(
-//     .n-menu-item-content--disabled
-//   ).n-menu-item-content--selected:hover::before {
-//   background-color: var(--primary-color);
-// }
-
-// .n-menu .n-menu-item-content.n-menu-item-content--selected .n-menu-item-content-header a {
-//   color: #fff;
-// }
-
-// .n-menu
-//   .n-menu-item-content:not(.n-menu-item-content--disabled).n-menu-item-content--selected:hover
-//   .n-menu
-//   .n-menu-item-content:not(.n-menu-item-content--disabled):hover::before {
-//   background-color: #e7f2fb;
-// }
-
-// .n-menu
-//   .n-menu-item-content:not(.n-menu-item-content--disabled):hover
-//   .n-menu-item-content-header
-//   a {
-//   color: var(--primary-color);
-// }
-
-// .n-menu .n-menu-item-content.n-menu-item-content--selected .n-menu-item-content__icon {
-//   color: #fff;
-// }
+.n-menu.n-menu--collapsed .n-menu-item-content.n-menu-item-content--selected::before {
+  background-color: var(--primary-color) !important;
+}
 </style>
