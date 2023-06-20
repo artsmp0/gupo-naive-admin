@@ -178,13 +178,13 @@ const test = () => {
       ref="$table"
       class="flex-1"
       :bordered="false"
-      striped
       size="small"
       :single-line="true"
       :single-column="true"
       :columns="columns"
       flex-height
       :list-api="getUserList"
+      :right-utils="[]"
       :pagination="{ pageSlot: 10, pageSize: 30 }"
     />
   </div>

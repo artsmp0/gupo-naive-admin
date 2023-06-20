@@ -1,0 +1,20 @@
+.n-data-table .n-data-table-tr:not(.n-data-table-tr--summary):hover > .n-data-table-td {
+  background-color: #f1f9ff !important;
+}
+
+.n-data-table .n-data-table-thead,
+.n-data-table .n-data-table-th {
+  background-color: #f1f9ff !important;
+}
+
+.n-data-table__pagination {
+  padding-right: 16px !important;
+  margin-bottom: 16px !important;
+}
+
+.n-pagination-item:not(.n-pagination-item--active) {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 3px 3px 0 rgb(0 0 0 / 4%);
+}

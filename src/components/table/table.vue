@@ -65,8 +65,13 @@ const $tableWrapper = shallowRef<HTMLDivElement>();
 </script>
 
 <template>
-  <div ref="$tableWrapper" class="h-full" flex="~ col">
-    <div class="py8" flex="~ justify-between items-center">
+  <div
+    ref="$tableWrapper"
+    class="h-full of-hidden rounded-6"
+    style="border: 1px solid #ddd"
+    flex="~ col"
+  >
+    <div v-if="props.rightUtils?.length" class="py8" flex="~ justify-between items-center">
       <div>
         <slot name="title" />
         <span v-if="checkedKeys.length" text-gray>
