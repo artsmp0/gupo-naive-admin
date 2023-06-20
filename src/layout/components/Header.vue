@@ -7,7 +7,6 @@ import {
   SettingsOutline
 } from '@vicons/ionicons5';
 import { CompressOutlined, ExpandOutlined, ReloadOutlined } from '@vicons/antd';
-import { isDark } from '@/composables';
 import { useFullscreen } from '@vueuse/core';
 import { NAvatar, NIcon, NText } from 'naive-ui';
 import { useUserStore } from '@/stores/user';
@@ -105,39 +104,6 @@ const onSelect = (key: string) => {
   }
 };
 
-function toggleDark(event: MouseEvent) {
-  const isAppearanceTransition =
-    // @ts-ignore
-    document.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (!isAppearanceTransition) {
-    isDark.value = !isDark.value;
-    return;
-  }
-
-  const x = event.clientX;
-  const y = event.clientY;
-  const endRadius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
-  // @ts-expect-error: Transition API
-  const transition = document.startViewTransition(async () => {
-    isDark.value = !isDark.value;
-    await nextTick();
-  });
-  transition.ready.then(() => {
-    const clipPath = [`circle(0px at ${x}px ${y}px)`, `circle(${endRadius}px at ${x}px ${y}px)`];
-    document.documentElement.animate(
-      {
-        clipPath: isDark.value ? [...clipPath].reverse() : clipPath
-      },
-      {
-        duration: 400,
-        easing: 'ease-out',
-        pseudoElement: isDark.value ? '::view-transition-old(root)' : '::view-transition-new(root)'
-      }
-    );
-  });
-}
-
 // 设置
 const showSettings = ref<boolean>(false);
 const settingStore = useSettingStore();
@@ -169,14 +135,6 @@ const APP_NAME = computed(() => settingStore.defaultSetting.APP_NAME);
           <NIcon>
             <CompressOutlined v-if="isFullscreen" />
             <ExpandOutlined v-else />
-          </NIcon>
-        </template>
-      </NButton>
-      <NButton v-if="SHOW_THEME_BTN" circle secondary @click="toggleDark">
-        <template #icon>
-          <NIcon>
-            <MoonOutline v-if="isDark" />
-            <SunnyOutline v-else />
           </NIcon>
         </template>
       </NButton>

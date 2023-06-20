@@ -1,16 +1,11 @@
-import { isDark } from '@/composables';
-import { createDiscreteApi, darkTheme, lightTheme, type ConfigProviderProps } from 'naive-ui';
+import { createDiscreteApi } from 'naive-ui';
 
-const configProviderPropsRef = computed<ConfigProviderProps>(() => ({
-  theme: isDark.value ? darkTheme : lightTheme
-}));
-
-const { message, notification, dialog, loadingBar } = createDiscreteApi(
-  ['message', 'dialog', 'notification', 'loadingBar'],
-  {
-    configProviderProps: configProviderPropsRef
-  }
-);
+const { message, notification, dialog, loadingBar } = createDiscreteApi([
+  'message',
+  'dialog',
+  'notification',
+  'loadingBar'
+]);
 
 export const useDiscrete = () => {
   return {

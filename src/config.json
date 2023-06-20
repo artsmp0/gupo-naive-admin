@@ -1,11 +1,11 @@
 {
-  "SHOW_BREADCRUMB": true,
-  "SHOW_TABS": true,
-  "SHOW_REFRESH_BTN": true,
-  "SHOW_FULLSCREEN_BTN": true,
-  "SHOW_THEME_BTN": true,
+  "SHOW_BREADCRUMB": false,
+  "SHOW_TABS": false,
+  "SHOW_REFRESH_BTN": false,
+  "SHOW_FULLSCREEN_BTN": false,
+  "SHOW_THEME_BTN": false,
   "SHOW_AVATAR": true,
-  "SIDE_WIDTH": 200,
+  "SIDE_WIDTH": 194,
   "PAGE_ANIMATION": "fade-up",
   "APP_NAME": "请在系统设置处修改系统名称"
 }
