@@ -5,6 +5,7 @@ import type { RouteMeta } from 'vue-router';
 import SvgIcon from '@/components/SvgIcon.vue';
 import { RouterLink } from 'vue-router';
 import { useWindowSize } from '@vueuse/core';
+import { useSettingStore } from '@/stores/setting';
 
 type GupoMenuOption = MenuOption & {
   name: string;
@@ -64,6 +65,9 @@ watch(width, (v) => {
     collapsed.value = true;
   }
 });
+
+const settingStore = useSettingStore();
+const SIDE_WIDTH = computed(() => settingStore.defaultSetting.SIDE_WIDTH);
 </script>
 
 <template>
@@ -71,7 +75,7 @@ watch(width, (v) => {
     bordered
     collapse-mode="width"
     :collapsed-width="64"
-    :width="200"
+    :width="SIDE_WIDTH"
     :collapsed="collapsed"
     :native-scrollbar="false"
     show-trigger

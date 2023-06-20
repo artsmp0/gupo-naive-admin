@@ -15,6 +15,8 @@ import Breadcrumbs from './Breadcrumbs.vue';
 import { useDiscrete } from '@/composables';
 import { isDdOrZzd } from '@/utils';
 import type { DropdownMixedOption } from 'naive-ui/es/dropdown/src/interface';
+import Settings from './Settings.vue';
+import { useSettingStore } from '@/stores/setting';
 
 const { toggle, isFullscreen } = useFullscreen(document.body);
 
@@ -103,8 +105,6 @@ const onSelect = (key: string) => {
   }
 };
 
-const appName = computed(() => import.meta.env.VITE_APP_TITLE);
-
 function toggleDark(event: MouseEvent) {
   const isAppearanceTransition =
     // @ts-ignore
@@ -137,22 +137,34 @@ function toggleDark(event: MouseEvent) {
     );
   });
 }
+
+// 设置
+const showSettings = ref<boolean>(false);
+const settingStore = useSettingStore();
+const SHOW_REFRESH_BTN = computed(() => settingStore.defaultSetting.SHOW_REFRESH_BTN);
+const SHOW_THEME_BTN = computed(() => settingStore.defaultSetting.SHOW_THEME_BTN);
+const SHOW_AVATAR = computed(() => settingStore.defaultSetting.SHOW_AVATAR);
+const SHOW_BREADCRUMB = computed(() => settingStore.defaultSetting.SHOW_BREADCRUMB);
+const SHOW_FULLSCREEN_BTN = computed(() => settingStore.defaultSetting.SHOW_FULLSCREEN_BTN);
+const APP_NAME = computed(() => settingStore.defaultSetting.APP_NAME);
 </script>
 
 <template>
   <NLayoutHeader class="h60 px20" flex="~ items-center justify-between" bordered>
     <div class="h40" flex="~ justify-center items-center">
       <img src="@/assets/imgs/logo.png" alt="LOGO" class="mr16 h-full" />
-      <NTag mr16 :bordered="false" type="error" size="small">{{ appName }}</NTag>
-      <Breadcrumbs />
+      <NTag mr16 :bordered="false" :color="{ textColor: 'var(--primary-color)' }" size="small">{{
+        APP_NAME
+      }}</NTag>
+      <Breadcrumbs v-if="SHOW_BREADCRUMB" />
     </div>
     <div class="shrink-0" flex="~ items-center gap-16">
-      <NButton secondary circle @click="reload">
+      <NButton v-if="SHOW_REFRESH_BTN" secondary circle @click="reload">
         <template #icon>
           <NIcon><ReloadOutlined /></NIcon>
         </template>
       </NButton>
-      <NButton circle secondary @click="toggle">
+      <NButton v-if="SHOW_FULLSCREEN_BTN" circle secondary @click="toggle">
         <template #icon>
           <NIcon>
             <CompressOutlined v-if="isFullscreen" />
@@ -160,7 +172,7 @@ function toggleDark(event: MouseEvent) {
           </NIcon>
         </template>
       </NButton>
-      <NButton circle secondary @click="toggleDark">
+      <NButton v-if="SHOW_THEME_BTN" circle secondary @click="toggleDark">
         <template #icon>
           <NIcon>
             <MoonOutline v-if="isDark" />
@@ -168,16 +180,17 @@ function toggleDark(event: MouseEvent) {
           </NIcon>
         </template>
       </NButton>
-      <NButton circle secondary>
+      <NButton circle secondary @click="showSettings = true">
         <template #icon>
           <NIcon>
             <SettingsOutline />
           </NIcon>
         </template>
       </NButton>
-      <NDropdown :options="userOptions" @select="onSelect">
+      <NDropdown v-if="SHOW_AVATAR" :options="userOptions" @select="onSelect">
         <NAvatar round> A </NAvatar>
       </NDropdown>
     </div>
+    <Settings v-model:show="showSettings" />
   </NLayoutHeader>
 </template>
